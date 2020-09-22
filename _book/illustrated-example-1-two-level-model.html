@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3.2 Illustrated Example 1: Two-Level Model | Multilevel Modeling in R with Application in Educational Research</title>
+  <meta name="description" content="This is a draft of a book on multilevel modeling for educational researchers using R." />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3.2 Illustrated Example 1: Two-Level Model | Multilevel Modeling in R with Application in Educational Research" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a draft of a book on multilevel modeling for educational researchers using R." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3.2 Illustrated Example 1: Two-Level Model | Multilevel Modeling in R with Application in Educational Research" />
+  
+  <meta name="twitter:description" content="This is a draft of a book on multilevel modeling for educational researchers using R." />
+  
+
+<meta name="author" content="Daniel Anderson" />
+<meta name="author" content="Joshua Rosenburg" />
+
+
+<meta name="date" content="2020-09-22" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="model-building.html"/>
+
+<script src="assets/jquery-2.2.3/jquery.min.js"></script>
+<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="assets/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="chapter" data-level="3" data-path="basic-concepts.html"><a href="basic-concepts.html"><i class="fa fa-check"></i><b>3</b> Basic Concepts</a><ul>
+<li class="chapter" data-level="3.1" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>3.1</b> Model building</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="model-building.html"><a href="model-building.html#centering"><i class="fa fa-check"></i><b>3.1.1</b> Centering</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="illustrated-example-1-two-level-model.html"><a href="illustrated-example-1-two-level-model.html"><i class="fa fa-check"></i><b>3.2</b> Illustrated Example 1: Two-Level Model</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Multilevel Modeling in R with Application in Educational Research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="illustrated-example-1-two-level-model" class="section level2">
+<h2><span class="header-section-number">3.2</span> Illustrated Example 1: Two-Level Model</h2>
+<p>We will now move from discussing HLM from an abstract, theoretical position, to illustrating the technique through a series of concrete examples. We will begin by analyzing cross-sectional data in two ways - first with a single-level multiple regression analysis, then with a two-level HLM analysis. The analyses are conducted with the same dataset, and include students’ specific disability type as a predictor of their state alternate assessment score for mathematics. The analyses are identical, with the exception of the HLM model accounting for the nesting of students within schools. Tables 2.3 and 2.4, below, illustrate the differences between the two models. Data for these analyses came from a sample of 288 students who had a severe cognitive disability, were enrolled in fifth grade, and took the math portion of one state’s alternate assessment during the 2010-2011 school year. All students were identified as having one of seven specific disabilities: (a) intellectual disability, (b) communication disorder, (c) emotionally disturbed, (d) orthopedic impairment, (e) other health impairment, (f) autism spectrum disorder, or (g) learning disabled. The referent group for both analyses was students with a learning disability. Table 2.2 displays descriptive statistics for each variable.</p>
+<p>Table 2.2
+Descriptive Statistics: Example 1
+Variable N Mean Standard deviation
+Intellectual disability (ID) 77 .27 .44
+Communication disorder (ComDis) 36 .13 .33
+Emotionally disturbed (ED) 8 .03 .16
+Orthopedic impairment (OI) 13 .05 .21
+Other health impairment (OHI) 35 .13 .33
+Autism spectrum disorder (Aut) 62 .22 .41
+Learning disabled (LD)* 57 .20 .40
+Students’ scores on the state alternate assessment (MthRIT) 288 97.87 15.17
+*Referent group</p>
+<p>For both analyses, MthRIT represented students’ scores on the math portion of the alternate assessment. All disability variables were dummy-coded vectors, coded 1 if the student had the disability, and 0 otherwise. Table 2.3 displays the results from the single-level multiple regression analysis.</p>
+<p>Table 2.3
+Single-Level Regression Results: Example 1
+Variable Unstandardized coefficients Standardized coefficients Correlations 95% Confidence interval
+b SE β t p Zero-order Semi-partial Lower bound Upper bound
+Intercept 108.75 1.73 62.93* .00 105.35 112.15
+ID -15.93 2.28 -.47 -6.99* .00 -.20 -.39 -20.42 -11.44
+ComDis -3.37 2.78 -.07 -1.21 .23 .19 -.07 -8.84 2.10
+ED -1.82 4.93 -.02 -.37 .71 .10 -.02 -11.52 7.88
+OI -27.49 4.01 -.38 -6.85* .00 -.24 -.38 -35.38 -19.59
+OHI -8.64 2.80 -.19 -3.08* .00 .06 -.18 -14.16 -3.13
+Aut -17.89 2.39 -.49 -7.47* .00 -.24 -.41 -22.60 -13.18
+* p &lt; .05</p>
+<p>The results of the model suggest that approximately 21 percent of the variance in alternate assessment scores was accounted for by students’ disability category (R2 = .21). Because students with LD were entered as the referent group, the intercept of the regression equation represents the average test score for students with LD on the state alternate assessment for math (108.75), as shown in the column labeled b of Table 2.3. Below the intercept, the effect of each predictor variable (student disability type) is reported. For example, students with an intellectual disability scored, on average, 15.93 points lower than students with LD. Similarly, students with autism spectrum disorder scored, on average, 17.89 points lower than students with LD. All predictor variables were significant (p &lt; .05), with the exception of students identified with an emotional disturbance or communication disabled.
+When conducting the HLM analyses, we began by specifying the unconditional, or null model, by specifying MthRIT as the outcome variable in Equation 2.1 to get</p>
+<p>〖MthRIT〗_ij=β_0j+r_ij
+(2.9)
+β_0j=γ_00+u_0j</p>
+<p>This model was, again, defined primarily to (a) evaluate the degree to which MthRIT scores depend upon the school the student was nested within, and (b) provide a baseline deviance statistic from which subsequent models could be compared. The results of the model displayed in Equation 2.9 are displayed in Table 2.4 as Model 1. The level 1 variance (σ2) was 112.28, and the level 2 variance (τ00) was 115.25. Plugging these numbers into Equation 2.7, we get
+ρ=115.25/(115.25+112.28) = .5065 (2.10)
+which equals the proportion of variance that lies between schools. Thus approximately 50.65% of the variance in MthRIT scores depended upon the school students attended (note: this is an unusually high number). The model had 2 estimated parameters, with deviance = 2246.932195.</p>
+<p>The next step in model building process was to add predictor variables at level 1. For this model, it would make little sense to enter the predictor variables separately given that they were a set of dummy-coded vectors. That is, the set of variables together represent a single theoretical construct (disability). Thus, all variables were entered into the model simultaneously, as</p>
+<p>〖MthRIT〗_ij=β_0j+β_1j (〖MR〗_ij )+β_2j (〖ComDis〗_ij )+β_3j (〖ED〗_ij )+β_4j (〖OI〗_ij )+β_5j (〖OHI〗_ij )+β_6j (〖Aut〗_ij )+r_ij (2.11)
+β_0j=γ_00+u_0j
+β_1j=γ_10
+β_2j=γ_20
+β_3j=γ_30
+β_4j=γ_40
+β_5j=γ_50
+β_6j=γ_60</p>
+<p>Note that the only difference between Equation 2.11 and the single-level model is the random effect u_0j on the intercept, allowing the term to vary by school. The results of the model shown in Equation 2.11 are displayed in Table 2.4 below as Model 2. Unfortunately, we cannot test for statistical significance in the difference between the deviance statistics between Model 1 and Model 2 because there were not sufficient degrees of freedom. However, as shown in Table 2.4, the deviance statistic does reduce noticeably. We can also explore the proportional reduction in unexplained variance by applying Equation 2.8, as follows
+Pseudo R2 =((112.28127-101.33984))/112.28127=0.097 (2.12)
+Thus, the inclusion of students’ disabilities reduced the unexplained variance by approximately 10%. Similarly, we can explore the variance in the intercept accounted for by the predictors by</p>
+<p>Pseudo R2 =((115.25220-76.50049))/115.25220=0.336 (2.13)
+which leads us to determine that students disability accounts for approximately 33.6% of the variance in students’ intercepts. Notice that all the values within Equations 2.12 and 2.13 can be found in Table 2.4. The values are simply carried out to more decimal places in the equations.</p>
+<p>If, for some reason, we hypothesized that the effect of a specific disability type on MthRIT depended on the school the student attended, we could simply estimate the corresponding random effects, as displayed in Equation 2.14.</p>
+<p>〖MthRIT〗_ij=β_0j+β_1j (〖MR〗_ij )+β_2j (〖ComDis〗_ij )+β_3j (〖ED〗_ij )+β_4j (〖OI〗_ij )+β_5j (〖OHI〗_ij )+β_6j (〖Aut〗_ij )+r_ij (2.14)
+β_0j=γ_00+u_0j
+β_1j=γ_10+u_1j
+β_2j=γ_20+u_2j
+β_3j=γ_30+u_3j
+β_4j=γ_40+u_4j
+β_5j=γ_50+u_5j
+β_6j=γ_60+u_6j</p>
+<p>Again, because the set of dummy-coded variables represent a single theoretical entity, it would make most sense to estimate all the random effects or none of the random effects. The results of Equation 2.14 are displayed as Model 3 in Table 2.4.</p>
+<p>Table 2.4
+HLM Results: Example 1
+Fixed Effects Model 1 Model 2 Model 3
+Intercept, γ_00 97.76** 105.55** 108.68<strong>
+ID, γ_10 - -11.21</strong> -15.89<strong>
+ComDis, γ_20 - -4.34</strong> -3.60<strong>
+ED, γ_30 - -2.51* -2.00
+OI, γ_40 - -18.24</strong> -15.43<strong>
+OHI, γ_50 - -6.22</strong> -9.49<strong>
+AUT, γ_60 - -11.60</strong> -14.32<strong>
+Variance Components (Random Effects)<br />
+Within-student, r_ij 112.28 101.34 68.51
+Intercept, u_0j 115.25</strong> 76.50** 0.17
+ID, u_1j - - 143.72
+ComDis, u_2j - - 0.85
+ED, u_3j - - 0.17
+OI, u_4j - - 328.08
+OHI, u_5j - - 99.35
+AUT, u_6j - - 176.11
+Deviance 2246.93 2181.25 2126.61
+**p &lt; .01, *p &lt; .05</p>
+<p>There are a couple of things to note about the HLM results. First, thus far only the results for models with predictors at level 1 (note the 0 in the second subscript in the fixed effects notation) have been presented. Second, although Model 3 technically fits the data the best, as it has the lowest deviance statistic, it displays some odd results. For example, the variance component values are both very high and very low, depending on the variable. Further, none of these values are statistically significant – suggesting the effect of student disability does not depend on school. Finally, Model 3 is perhaps less theoretically plausible than Model 2. That is, one would expect the effect of a specific disability type to be largely invariant across schools, and not depend upon school membership, given that it is a trait of the student. While instruction occurring within the school may influence this relationship, that instruction is mostly accounted for by the random intercept term.</p>
+<p>If we consider Model 2 our final model, and compare the HLM results in Table 2.4 to our single-level results in Table 2.3, we can see some important differences. The intercept is approximately 3 points lower, while the magnitude of the effects of intellectual disability, orthopedic impairment, other health impairment, and autism are all markedly reduced. The effects of all remaining disability variables, however, actually increase in magnitude. These differences arise purely by accounting for the nesting of students within schools.</p>
+<p>Although we conclude the discussion of cross-sectional data here, it is also important to highlight that any number of school-level predictors could be added to the model at level 2. These variables could be entered as a predictor of the intercept or any of the level 1 predictors – analogous to a cross-level interaction (which is evident when examining the full mixed model equation). For example, we may hypothesize that students’ MthRIT score depends upon the size of the school. A school size variable could then be entered as a predictor of the level 1 intercept as γ_01 (Size). If we theorized that, for some reason, the effect of a students’ disability – say ED – on MthRIT depended on school size, we could easily model the interaction with γ_31 (Size). Note how the subscripts change between these variables. In both cases Size is the first level 2 predictor (second subscript), but in the first example Size is a predictor of the intercept (i.e., 0 predictors in the model) and in the second example Size is a predictor of the third level 1 predictor, ED. Thus, the flexibility in the types of relations HLM allows researchers to model is tremendous.</p>
+
+</div>
+<!-- </div> -->
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="model-building.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/lunr.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"toolbar": {
+"position": "static"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3.1 Model building | Multilevel Modeling in R with Application in Educational Research</title>
+  <meta name="description" content="This is a draft of a book on multilevel modeling for educational researchers using R." />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3.1 Model building | Multilevel Modeling in R with Application in Educational Research" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a draft of a book on multilevel modeling for educational researchers using R." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3.1 Model building | Multilevel Modeling in R with Application in Educational Research" />
+  
+  <meta name="twitter:description" content="This is a draft of a book on multilevel modeling for educational researchers using R." />
+  
+
+<meta name="author" content="Daniel Anderson" />
+<meta name="author" content="Joshua Rosenburg" />
+
+
+<meta name="date" content="2020-09-22" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="basic-concepts.html"/>
+<link rel="next" href="illustrated-example-1-two-level-model.html"/>
+<script src="assets/jquery-2.2.3/jquery.min.js"></script>
+<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="assets/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="chapter" data-level="3" data-path="basic-concepts.html"><a href="basic-concepts.html"><i class="fa fa-check"></i><b>3</b> Basic Concepts</a><ul>
+<li class="chapter" data-level="3.1" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>3.1</b> Model building</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="model-building.html"><a href="model-building.html#centering"><i class="fa fa-check"></i><b>3.1.1</b> Centering</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="illustrated-example-1-two-level-model.html"><a href="illustrated-example-1-two-level-model.html"><i class="fa fa-check"></i><b>3.2</b> Illustrated Example 1: Two-Level Model</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Multilevel Modeling in R with Application in Educational Research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="model-building" class="section level2">
+<h2><span class="header-section-number">3.1</span> Model building</h2>
+<p>When building HLM models the researcher generally begins with a null, or empty model. Predictors are then added to the model in a forward or backward elimination approach. The overall fit of the model must also be considered throughout the model building process. Below, each of these issues is discussed in turn.</p>
+<p>Null model. For a basic two-level model, the null model is defined simply by Equation 2.1. The model is equivalent to a one-way analysis of variance (ANOVA) and is used within an HLM framework primarily to establish a baseline model from which subsequent models can be compared, and to capture the degree to which variance at level 1 depends upon group membership at level 2. Dependence at the higher levels can be assessed through the intraclass correlation coefficient (ICC), defined as</p>
+<p>ρ=τ_00/((σ^2+τ_00 ) ) (2.7)</p>
+<p>where,</p>
+<p>ρ = the ICC,
+τ_00=u_0j= variance at level 2
+σ^2=r_ij= variance at level 1</p>
+<p>The ICC ranges from 0 to 1.0 and describes the proportion of the total variance that depends upon group membership. Although not discussed yet, it is worth mentioning here that the ICC for three level models is calculated similarly, but simply includes the variance term for the third level in the denominator. The ICC can then be calculated for level 2, with τ_00 in the numerator, or for level 3 with τ_000 in the numerator.</p>
+<p>Some (e.g., Lee, 2000) suggest interpreting the ICC as a means for determining whether HLM is warranted, or whether standard single-level regression would suffice. For example, if there is a small amount of dependence on the higher-level groupings then the independence of observations assumption of single-level regression may not be violated, and thus may be an appropriate technique. Yet, as Roberts (2007) suggests, small ICCs may not warrant abandoning HLM given that additional dependence can arise after predictors have been entered into the model. The ICC, therefore, should be an initial indicator of the warrants of HLM, but small values should not immediately rule out its use.</p>
+<p>Entering predictor variables. Predictor variables can be entered into an HLM analysis through a forward, backward elimination, or simultaneous “block-entry” approach. The choice of how to include predictors into the model often depends upon the a priori assumption about the relations between predictor variable (i.e., how they interact) and the overall purpose of the analysis. For example, if a researcher were including variables in a model that theoretically interacted in a meaningful way, he or she would likely want to enter both variables into the model simultaneously (along with, potentially, their interaction term). However, if the researcher was interested in the unique contribution of each predictor, independent of the other predictors in the model, then he or she would likely want to enter each predictor sequentially, examining the model fit between each subsequent model. Further, a researcher may be interested in, for instance, examining the effect of a specific predictor after a host of demographic variables have been controlled for. In this case, the researcher would enter all the demographic variables into the model (first block), run the analysis, then enter the predictor variable of interest in the model and rerun the analysis, testing for differences in model fit between the two models.</p>
+<div id="centering" class="section level3">
+<h3><span class="header-section-number">3.1.1</span> Centering</h3>
+<p>Perhaps more important than sequential or simultaneous entering of predictors, however, is the choice of centering. Variables can generally be entered into the model in three ways: uncentered, group centered, or grand-mean centered. The choice of centering changes the interpretation of the intercept, and improper centering can result in model misspecification and untrustworthy results. Centering is necessary whenever a variable does not have a true zero point. Just as with standard regression, the intercept represents the value on the dependent variable when all predictor variables are 0. When a variable does not have a true zero point, the variable must be transformed or centered so that it does. For instance, scores on the SAT math test range from 200-800. Prior to analysis, 200 points from each score could be subtracted so the variable would have a true zero point, and the scale would range from 0-600.</p>
+<p>When variables are entered uncentered, or a transformation such as that described above is used prior to the analysis, the variable maintains (roughly) its original scale. That is, the intercept represents the average score on the dependent variable for students with a 0 (or a transformed 0, i.e., 200 on the example above) on the predictor variable. Alternatively, the SAT variable could be entered group or grand-mean centered. Group centering refers to subtracting the average score from the higher-level group (e.g., school) for all students within said group. Thus, variables can only be entered group centered at the lower levels of the model, and not at the highest level. Group-centering also changes the model as a whole. That is, group-centering is not simply a linear transformation of the variable. The model fit overall will change when group-mean centering is used (Hox, 2010). When variables are entered group centered the intercept then represent the average score for the group for which the student is a member.</p>
+<p>Finally, at any level variables can be entered grand-mean centered by subtracting the overall grand-mean (mean for the variable across all units) from each score. Grand-mean centering is a simple linear transformation of students’ scores, and the model-fit is not changed. When variables are entered grand-mean centered the intercept represents the average score on the dependent variable for all individuals in the dataset. Differences in variable centering methods are important given that they change the interpretation of the intercept, and, potentially, the model overall. But centering can also have some additional benefits, such as reducing issues of multicollinearity, which can ease estimation.</p>
+<p>Once variables have been entered into the model, we can estimate a “pseudo R2” statistic. Unfortunately, there is no direct measure of the variance accounted for by HLM models – hence the name “pseudo”. Pseudo R2 statistics provide an indication of the amount of variance accounted for by comparing the variance component in an unconditional model to the same variance component in a conditional model. Pseudo R2 can be calculated for the overall residual in the model, r_ij, or for any random parameter in the model (e.g., intercept variance). Pseudo R2 is calculated by applying the following formula:
+Pseudo R2 =((σ_unconditional<sup>2-σ_conditional</sup>2))/(σ_unconditional^2 ) (2.8)
+Applying Equation 2.8 provides an estimate of the proportional reduction in unexplained variance in the random parameter, accounted for by the predictor variables in the model. When exploring how predictor variables account for the variance in specific parameters, one would simply substitute the σ^2 terms for τ’s.</p>
+<p>Model fit. The primary fit statistic used in HLM analyses is the deviance statistic. The deviance statistic is equal to -2 * the natural log of the likelihood ratio. Note that the actual computation of the deviance statistic is based on the maximum likelihood estimation procedure (and thus can only be computed when maximum likelihood estimation is used), which is beyond the scope of this paper. However, it is worth noting that the deviance statistic is an incremental fit indicator, by which its values are only meaningful relative to the values obtained from other models. Yet, to compare the deviance between models, they must also be nested – meaning that one model could be constructed from the other by simply including or eliminating predictor variables. So, for instance, the deviance from a two-level model cannot be compared to the deviance from a three-level model, or a two-level model with a different outcome.</p>
+<p>Part of the reason that we always begin model building with an unconditional, or null model – is so that we have a baseline from which to compare the deviance statistic to for subsequent nested models. In general, the researcher begins by examining the deviance statistic from the null model. Predictors are then entered at level 1, and the deviance for these conditional models are compared relative to the null model. Once a level 1 model has be “settled” upon, the researcher then proceeds to enter predictors at level 2, using the deviance from the final level 1 model for subsequent model fit comparisons. If the model includes more than two levels then the researcher continues this process until a final model is established (i.e., comparing the deviance from models with predictors at level 3 with the final level 2 model).</p>
+<p>Deviance represents “lack of fit”, with larger values indicating a poorer fitting model. The fit between two models can be statistically tested. The procedure is quite simple, given that the difference between two deviance statistics follows a chi-square distribution, with the degrees of freedom equal to the difference in the number of parameters estimated in the two models. If the resulting value is significant, then the model with the lower deviance value fits the data significantly better. Evaluating model fit can, at times, be a bit confusing given that individual coefficients added to the model may be significant, but the overall difference in model fit may not be significant. Theory, of course, should always guide decisions about subsequent steps in model building, but generally if the overall model does not fit significantly better, then parsimony would dictate the removal of the predictor variable in the more complex model, despite its significance.</p>
+<p>Finally, I would be remiss if I failed to mention some of the underlying assumptions of HLM, which should be thoroughly evaluated before any results are interpreted. There are, in general, six assumptions related to HLM – three concerning the error structure, and three concerning the predictor variables. These assumptions are outlined in Table 2.1 below.
+Table 2.1</p>
+<p>HLM Model Assumptions
+Error structure assumptions Predictor variable assumptions
+Independent and normally distributed level 1 residuals, with a mean of 0 and common variance, σ^2. Level 1 predictors independent of level 1 residuals
+Independent random effects at higher levels (i.e., level 2 &amp; level 3), multivariate normally distributed, with a mean of 0 and a common variance, τ^2. Higher level predictors independent of the residuals at the corresponding level
+Residuals between levels are independent (i.e., no covariance between residuals at different levels). Predictors at each level are independent of the random effects at other levels
+While the researchers may not explicitly discuss model assumptions within a research paper, they should, at minimum, provide the reader with assurances that assumptions were investigated and that no major violations were found (perhaps through a footnote).</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="basic-concepts.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="illustrated-example-1-two-level-model.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/lunr.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"toolbar": {
+"position": "static"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

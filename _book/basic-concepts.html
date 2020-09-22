@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Basic Concepts | Multilevel Modeling in R with Application in Educational Research</title>
+  <meta name="description" content="This is a draft of a book on multilevel modeling for educational researchers using R." />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Basic Concepts | Multilevel Modeling in R with Application in Educational Research" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a draft of a book on multilevel modeling for educational researchers using R." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Basic Concepts | Multilevel Modeling in R with Application in Educational Research" />
+  
+  <meta name="twitter:description" content="This is a draft of a book on multilevel modeling for educational researchers using R." />
+  
+
+<meta name="author" content="Daniel Anderson" />
+<meta name="author" content="Joshua Rosenburg" />
+
+
+<meta name="date" content="2020-09-22" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction.html"/>
+<link rel="next" href="model-building.html"/>
+<script src="assets/jquery-2.2.3/jquery.min.js"></script>
+<link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="assets/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="assets/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="chapter" data-level="3" data-path="basic-concepts.html"><a href="basic-concepts.html"><i class="fa fa-check"></i><b>3</b> Basic Concepts</a><ul>
+<li class="chapter" data-level="3.1" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>3.1</b> Model building</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="model-building.html"><a href="model-building.html#centering"><i class="fa fa-check"></i><b>3.1.1</b> Centering</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="illustrated-example-1-two-level-model.html"><a href="illustrated-example-1-two-level-model.html"><i class="fa fa-check"></i><b>3.2</b> Illustrated Example 1: Two-Level Model</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Multilevel Modeling in R with Application in Educational Research</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="basic-concepts" class="section level1">
+<h1><span class="header-section-number">3</span> Basic Concepts</h1>
+<p>In contexts where data are nested (e.g., students nested within schools) and the effect of predictor variables on some outcome depend on that nesting, it is important that the nesting be accounted for in the model to avoid misrepresenting the effects. In many cases, individuals nested within some higher-level unit are more similar to each other than they are different and the observed effect of some treatment may then depend, in part, upon their membership to a specific higher-level unit (e.g., students attending School A instead of School B). If the data are dependent upon the higher-level unit then the residuals of individuals within the unit will be correlated – violating the independence of observations assumption of standard single-level regression (Raudenbush &amp; Bryk, 2002).</p>
+<p>As Roberts (2004) showed, not accounting for nested structures may potentially have dramatic effects and can even reverse the fundamental findings of the study. Roberts used a composite variable called “urbanicity” to predict students’ science achievement. Without accounting for the nesting there was a .77 correlation, indicating that as students’ urbanicity score increased, their science achievement generally did as well. This finding was puzzling and counter to previous research (e.g., Hannaway &amp; Talbert, 1993). However, by accounting for the nesting of students within schools, the correlation became -.81, implying that as students’ urbanicity increased their science achievement generally decreased. The reversal of the observed effect was found because within each school the correlation was negative, but by ignoring the context of the school the correlation “looked” positive. Generally, accounting for nesting does not produce as dramatic results as those shown by Roberts, but it serves as a good reminder for why accounting for nesting is so important.</p>
+<p>Not accounting for nested data structures generally leads to aggregation bias, misestimated standard errors, and heterogeneity of regression (Raudenbush &amp; Bryk, 2002). Aggregation bias occurs when a variable takes on a different meaning in its aggregated form than it does in its disaggregated form. When entering the aggregated variable into the model as a predictor variable it may then bias the results toward the aggregated meaning of the variable. As Raudenbush and Bryk highlight, for example, the overall composition of a school’s student population (e.g., percent of students eligible for free or reduced price lunch; FRL) may have an effect on individual students beyond the effect of individual FRL eligibility. As will be discussed later in the paper, HLM can readily handle these complex relationships.</p>
+<p>Misestimated standard errors occur when we fail to account for the dependence upon the higher-level units – i.e., when the independence of observations assumption is violated. HLM corrects the estimation by including the higher-level units in the model so that observations within a unit are independent. Heterogeneity of regressions occurs when the relation between a predictor variable and a specific outcome vary by some higher-level unit. For example, perhaps in some schools the relation between FRL and student achievement is quite strong while in others it is considerably weaker. Standard single-level regression would ignore this heterogeneity and assume the relation is constant across schools, while HLM can explicitly test and account for the heterogeneous relationships.
+Two-Level Models</p>
+<p>In this section I begin by providing an overview of the notation used in HLM for a two-level model. I then move to a section on model building. Model building in HLM must be systematic and theoretically based. The complexity of the models necessitate careful consideration of each decision made so the final model makes sound theoretical sense and the analyst does not “overfit” the model to the specific sample he or she has attained.
+Notation</p>
+<p>The notation for all HLM models can be displayed in two ways: by the level of analysis, or in a single equation called a “mixed model”. Models that are not terribly complex are often displayed as a single equation. However, as the models become more complicated it is often helpful to have the equations separated by the level of analysis. Equation 2.1 below details a basic two-level HLM model with no predictor variables, displayed by level.</p>
+<p>$$
+Y_{ij}=<em>{0j} + r</em>{ij}</p>
+<p><em>{0j} = </em>{00} + u_{0j}
+$$</p>
+<p>At level 1, Y_ij represents the outcome Y for level one unit i nested in level two unit j, and is equal to a level one intercept, β_0j, and residual or unexplained variance r_ij. At level 2, the level 1 intercept, β_0j, is set as the outcome in a new regression equation with two components: the level 2 intercept, γ_00, and a random parameter, u_0j, which is the level 2 residual variance. The level 2 random parameter, u_0j, is what allows the model to vary by the higher-level unit. Equation 2.1 can also be displayed in its mixed model form, by simply substituting the level 2 equation into the level 1 equation. We then obtain:
+Y_ij=γ_00+〖u_0j+r〗_ij (2.2)</p>
+<p>Note that Equation 2.2 represents the same model as Equation 2.1, but as a single equation. The β_0j term has now dropped out of the model given that it is defined by γ_00+u_0j. In other words, Equation 2 simply represents the substitution of β_0j with the higher-level terms that define it.</p>
+<p>To better illustrate what these terms mean we can utilize a typical example in education – students nested within schools. We can use HLM to control for this nesting and more accurately examine the effects of specific predictor variables on an outcome. For instance, say we were interested in the math achievement of students. Equation 2.2 then becomes
+〖Math〗_ij=γ_00+〖u_0j+r〗_ij (2.3)</p>
+<p>Note that all that has changed at this point is that the outcome Y_ij has been substituted with 〖Math〗_ij. However, now that we have some context of a problem we can better define what the terms mean. In this model, the math achievement of student i nested in school j is equal to the average achievement of schools (i.e., school level intercept), γ_00, plus the random component related to the school the student attends, u_0j (i.e., the difference between the overall average school achievement and average achievement for school j, the school the student attends), plus residual variance unique to the student and not captured by the model, r_ij. The r_ij term includes all the “left over” variance in the model, and includes measurement error, unaccounted for variables in the model, or potentially a host of other factors. The random component u_0j is what differentiates HLM from standard single-level regression because it allows the intercepts of schools to vary, whereas in single-level regression only one intercept would be calculated and assumed fixed, or equal, across schools. HLM relaxes this assumption, and allows school intercepts to vary randomly (in other words, the intercepts are freely estimated).</p>
+<p>Predictor variables can also be added to the model at level 1, level 2, or both. Adding one predictor to each level results in the following model</p>
+<p>Y_ij=β_0j+β_1j X_ij+r_ij
+(2.4)
+β_0j=γ_00+γ_01 W_j+u_0j
+β_1j=γ_10+γ_11 W_j+u_1j</p>
+<p>Where X_ij represents a predictor variable for individual i nested in level 2 unit j, and W_j represents a predictor variable for level 2 unit j. Note that for each new predictor added to the model at level 1 we get a new beta at level 2 that is set as an outcome. In other words, each term in the level 1 model has its own regression equation at level 2, which can include both an intercept and a residual (random effect). The random effects at the higher levels in the model (u_ij) can also be fixed at 0, which forces the effect to stay constant across all level 2 units, as with single-level regression. Indeed, if all random effects at the higher levels were fixed to 0 then the equation simplifies to a single-level regression equation. Thus, the entire basis of HLM lies in the random effects at the higher levels. For each of these variables researchers have to determine whether it makes theoretical sense to include the random effect for the term or not. If there is no reason to believe that any of the effects will vary at the higher levels – including the intercept and all predictor variables – then HLM may not be warranted. However, as we will see later we can also use the null model in Equation 2.1 to test for the degree of dependence upon the higher levels by estimating the intraclass correlation coefficient.</p>
+<p>Now that the model has become more complex it is also critical that we pay close attention to subscripts so we can recognize what each term is referencing. In a two-level model each term has two subscripts, the first of which corresponds to level 1 while the second refers to level 2. For each subscript, 0 refers to an intercept, while all other numbers simply represent a sequential count of predictor variables added to the model. This can quickly become confusing, as γ_00, γ_01, γ_10, and γ_11 all refer to different parameters. With practice, however, it can eventually become second nature. For example, γ_00 is the overall intercept in the model, as there are no predictor variables included. The γ_10 term represents the coefficient for the first predictor at level 1, while γ_01 refers to the first level 2 predictor variable of the level 1 intercept (i.e., 0 predictors at level 1). The γ_11 is slightly more complicated, as it is the first level 2 predictor of the first level 1 predictor. For example, γ_11 may refer to the effect of a student with a disability (level 1 predictor) attending a private school (level 2 predictor) on the student’s achievement (outcome).</p>
+<p>We can, of course, also display Equation 2.4 in its mixed model form by substituting the terms from level 2 into level 1, as follows:</p>
+<p>Equation 2.4 is defined as
+Y_ij=β_0j+β_1j X_ij+r_ij</p>
+<p>β_0j=γ_00+γ_01 W_j+u_0j
+β_1j=γ_10+γ_11 W_j+u_1j</p>
+<p>Substitute in γ_00+γ_01 W_j+u_0j for β_(0j )
+Y_ij=γ_00+γ_01 W_j+u_0j+β_1j X_ij+r_ij
+β_1j=γ_10+γ_11 W_j+u_1j</p>
+<p>Substitute in γ_10+γ_11 W_j+u_1j for β_1j
+Y_ij=γ_00+γ_01 W_j+u_0j+(γ_10+γ_11 W_j+u_1j)X_ij+r_ij</p>
+<p>Redistribute
+Y_ij=γ_00+γ_01 W_j+u_0j+γ_10 X_ij+γ_11 W_j X_ij+u_1j X_ij+r_ij</p>
+<p>By convention, the terms are generally rearranged so that the fixed effects appear first, followed by the random effects, which leads us to our final mixed model, defined as</p>
+<p>Y_ij=γ_00+γ_10 X_ij+γ_01 W_j+γ_11 W_j X_ij+u_0j+u_1j X_ij+r_ij (2.5)</p>
+<p>As predictor variables are added to the model it can quickly become quite complex. Paying close attention to the subscripts can help make the structure of the model clear so you can better understand whether the model makes theoretical sense, and what relationships specifically the researcher is testing.</p>
+<p>Going back to our example with math, we may theorize specific predictor variables that affect student achievement at both the individual student level and the school level. For example, we may hypothesize that students’ eligible for free or reduced price lunch (FRL) may have significantly different math achievement than students not eligible for FRL. We may further hypothesize that FRL has a school level effect – as in, students in schools with a high proportion of FRL eligibility may have significantly different math achievement than students attending low proportion FRL eligible schools, independent of their own FRL status. Equation 2.4 then becomes</p>
+<p>〖Math〗_ij=β_0j+β_1j 〖FRL〗_ij+r_ij (2.6)
+β_0j=γ_00+γ_01 〖AverageFRL〗_j+u_0j
+β_1j=γ_10+γ_11 〖AverageFRL〗_j+u_1j</p>
+<p>There are a few important aspects to highlight in equation 2.6 corresponding to the underlying theory. First, the level 1 model is quite basic, simply stating that the math achievement of students depends, in part, upon their FRL status. The level 2 model, however, is a bit more complex. First, the model states that a student’s intercept depends, in part, upon the average FRL – or the proportion of FRL eligible students – in the school the student attends. This effect is specified to vary randomly across schools. But perhaps even more complex, the model states that the effect of an individual’s FRL status upon his or her math achievement depends, in part, upon the average FRL of the school the student attends (the γ_11 term). This effect is similarly specified to vary randomly across schools.</p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="model-building.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="assets/gitbook-2.6.7/js/app.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/lunr.js"></script>
+<script src="assets/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="assets/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="assets/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"toolbar": {
+"position": "static"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
