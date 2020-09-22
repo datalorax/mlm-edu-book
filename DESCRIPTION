@@ -1,0 +1,20 @@
+Package: mlm-edu-book
+Title: Multilevel Modeling in R with Application in Educational Research
+Version: 0.0.0.9000
+Authors@R: c(
+    person(given = "Daniel",
+           family = "Anderson",
+           role = c("aut", "cre"),
+           email = "daniela@uoregon.edu",
+           comment = c(ORCID = "https://orcid.org/0000-0003-4699-4680")),
+    person(given = "Joshua",
+           family = "Rosenberg",
+           role = "aut",
+           email = "jmrosenberg@utk.edu",
+           comment = c(ORCID = "http://orcid.org/0000-0003-2170-0447"))
+    )
+License: CC BY 4.0
+URL: https://github.com/datalorax/mlm-edu-book
+BugReports: https://github.com/datalorax/mlm-edu-book/issues
+Imports: 
+    bookdown
