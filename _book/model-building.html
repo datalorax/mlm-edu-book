@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.1 Model building | Multilevel Modeling in R with Application in Educational Research</title>
+  <title>2.1 Model building | Multilevel Modeling for Educational Research with applications in R</title>
   <meta name="description" content="This is a draft of a book on multilevel modeling for educational researchers using R." />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.1 Model building | Multilevel Modeling in R with Application in Educational Research" />
+  <meta property="og:title" content="2.1 Model building | Multilevel Modeling for Educational Research with applications in R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.1 Model building | Multilevel Modeling in R with Application in Educational Research" />
+  <meta name="twitter:title" content="2.1 Model building | Multilevel Modeling for Educational Research with applications in R" />
   
   <meta name="twitter:description" content="This is a draft of a book on multilevel modeling for educational researchers using R." />
   
@@ -55,6 +55,7 @@
 
 
 
+<link rel="stylesheet" href="custom.css" type="text/css" />
 </head>
 
 <body>
@@ -68,12 +69,11 @@
 
 <ul class="summary">
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a></li>
-<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
-<li class="chapter" data-level="3" data-path="basic-concepts.html"><a href="basic-concepts.html"><i class="fa fa-check"></i><b>3</b> Basic Concepts</a><ul>
-<li class="chapter" data-level="3.1" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>3.1</b> Model building</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="model-building.html"><a href="model-building.html#centering"><i class="fa fa-check"></i><b>3.1.1</b> Centering</a></li>
+<li class="chapter" data-level="2" data-path="basic-concepts.html"><a href="basic-concepts.html"><i class="fa fa-check"></i><b>2</b> Basic Concepts</a><ul>
+<li class="chapter" data-level="2.1" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>2.1</b> Model building</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="model-building.html"><a href="model-building.html#centering"><i class="fa fa-check"></i><b>2.1.1</b> Centering</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="illustrated-example-1-two-level-model.html"><a href="illustrated-example-1-two-level-model.html"><i class="fa fa-check"></i><b>3.2</b> Illustrated Example 1: Two-Level Model</a></li>
+<li class="chapter" data-level="2.2" data-path="illustrated-example-1-two-level-model.html"><a href="illustrated-example-1-two-level-model.html"><i class="fa fa-check"></i><b>2.2</b> Illustrated Example 1: Two-Level Model</a></li>
 </ul></li>
 </ul>
 
@@ -84,7 +84,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Multilevel Modeling in R with Application in Educational Research</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Multilevel Modeling for Educational Research with applications in R</a>
           </h1>
         </div>
 
@@ -93,7 +93,7 @@
 
             <section class="normal" id="section-">
 <div id="model-building" class="section level2">
-<h2><span class="header-section-number">3.1</span> Model building</h2>
+<h2><span class="header-section-number">2.1</span> Model building</h2>
 <p>When building HLM models the researcher generally begins with a null, or empty model. Predictors are then added to the model in a forward or backward elimination approach. The overall fit of the model must also be considered throughout the model building process. Below, each of these issues is discussed in turn.</p>
 <p>Null model. For a basic two-level model, the null model is defined simply by Equation 2.1. The model is equivalent to a one-way analysis of variance (ANOVA) and is used within an HLM framework primarily to establish a baseline model from which subsequent models can be compared, and to capture the degree to which variance at level 1 depends upon group membership at level 2. Dependence at the higher levels can be assessed through the intraclass correlation coefficient (ICC), defined as</p>
 <p>ρ=τ_00/((σ^2+τ_00 ) ) (2.7)</p>
@@ -105,7 +105,7 @@
 <p>Some (e.g., Lee, 2000) suggest interpreting the ICC as a means for determining whether HLM is warranted, or whether standard single-level regression would suffice. For example, if there is a small amount of dependence on the higher-level groupings then the independence of observations assumption of single-level regression may not be violated, and thus may be an appropriate technique. Yet, as Roberts (2007) suggests, small ICCs may not warrant abandoning HLM given that additional dependence can arise after predictors have been entered into the model. The ICC, therefore, should be an initial indicator of the warrants of HLM, but small values should not immediately rule out its use.</p>
 <p>Entering predictor variables. Predictor variables can be entered into an HLM analysis through a forward, backward elimination, or simultaneous “block-entry” approach. The choice of how to include predictors into the model often depends upon the a priori assumption about the relations between predictor variable (i.e., how they interact) and the overall purpose of the analysis. For example, if a researcher were including variables in a model that theoretically interacted in a meaningful way, he or she would likely want to enter both variables into the model simultaneously (along with, potentially, their interaction term). However, if the researcher was interested in the unique contribution of each predictor, independent of the other predictors in the model, then he or she would likely want to enter each predictor sequentially, examining the model fit between each subsequent model. Further, a researcher may be interested in, for instance, examining the effect of a specific predictor after a host of demographic variables have been controlled for. In this case, the researcher would enter all the demographic variables into the model (first block), run the analysis, then enter the predictor variable of interest in the model and rerun the analysis, testing for differences in model fit between the two models.</p>
 <div id="centering" class="section level3">
-<h3><span class="header-section-number">3.1.1</span> Centering</h3>
+<h3><span class="header-section-number">2.1.1</span> Centering</h3>
 <p>Perhaps more important than sequential or simultaneous entering of predictors, however, is the choice of centering. Variables can generally be entered into the model in three ways: uncentered, group centered, or grand-mean centered. The choice of centering changes the interpretation of the intercept, and improper centering can result in model misspecification and untrustworthy results. Centering is necessary whenever a variable does not have a true zero point. Just as with standard regression, the intercept represents the value on the dependent variable when all predictor variables are 0. When a variable does not have a true zero point, the variable must be transformed or centered so that it does. For instance, scores on the SAT math test range from 200-800. Prior to analysis, 200 points from each score could be subtracted so the variable would have a true zero point, and the scale would range from 0-600.</p>
 <p>When variables are entered uncentered, or a transformation such as that described above is used prior to the analysis, the variable maintains (roughly) its original scale. That is, the intercept represents the average score on the dependent variable for students with a 0 (or a transformed 0, i.e., 200 on the example above) on the predictor variable. Alternatively, the SAT variable could be entered group or grand-mean centered. Group centering refers to subtracting the average score from the higher-level group (e.g., school) for all students within said group. Thus, variables can only be entered group centered at the lower levels of the model, and not at the highest level. Group-centering also changes the model as a whole. That is, group-centering is not simply a linear transformation of the variable. The model fit overall will change when group-mean centering is used (Hox, 2010). When variables are entered group centered the intercept then represent the average score for the group for which the student is a member.</p>
 <p>Finally, at any level variables can be entered grand-mean centered by subtracting the overall grand-mean (mean for the variable across all units) from each score. Grand-mean centering is a simple linear transformation of students’ scores, and the model-fit is not changed. When variables are entered grand-mean centered the intercept represents the average score on the dependent variable for all individuals in the dataset. Differences in variable centering methods are important given that they change the interpretation of the intercept, and, potentially, the model overall. But centering can also have some additional benefits, such as reducing issues of multicollinearity, which can ease estimation.</p>
@@ -184,6 +184,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

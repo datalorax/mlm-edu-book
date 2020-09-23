@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Multilevel Modeling in R with Application in Educational Research</title>
+  <title>Multilevel Modeling for Educational Research with applications in R</title>
   <meta name="description" content="This is a draft of a book on multilevel modeling for educational researchers using R." />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Multilevel Modeling in R with Application in Educational Research" />
+  <meta property="og:title" content="Multilevel Modeling for Educational Research with applications in R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Multilevel Modeling in R with Application in Educational Research" />
+  <meta name="twitter:title" content="Multilevel Modeling for Educational Research with applications in R" />
   
   <meta name="twitter:description" content="This is a draft of a book on multilevel modeling for educational researchers using R." />
   
@@ -33,7 +33,7 @@
   
   
 
-<link rel="next" href="introduction.html"/>
+<link rel="next" href="basic-concepts.html"/>
 <script src="assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="assets/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -55,6 +55,7 @@
 
 
 
+<link rel="stylesheet" href="custom.css" type="text/css" />
 </head>
 
 <body>
@@ -68,12 +69,11 @@
 
 <ul class="summary">
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a></li>
-<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
-<li class="chapter" data-level="3" data-path="basic-concepts.html"><a href="basic-concepts.html"><i class="fa fa-check"></i><b>3</b> Basic Concepts</a><ul>
-<li class="chapter" data-level="3.1" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>3.1</b> Model building</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="model-building.html"><a href="model-building.html#centering"><i class="fa fa-check"></i><b>3.1.1</b> Centering</a></li>
+<li class="chapter" data-level="2" data-path="basic-concepts.html"><a href="basic-concepts.html"><i class="fa fa-check"></i><b>2</b> Basic Concepts</a><ul>
+<li class="chapter" data-level="2.1" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>2.1</b> Model building</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="model-building.html"><a href="model-building.html#centering"><i class="fa fa-check"></i><b>2.1.1</b> Centering</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="illustrated-example-1-two-level-model.html"><a href="illustrated-example-1-two-level-model.html"><i class="fa fa-check"></i><b>3.2</b> Illustrated Example 1: Two-Level Model</a></li>
+<li class="chapter" data-level="2.2" data-path="illustrated-example-1-two-level-model.html"><a href="illustrated-example-1-two-level-model.html"><i class="fa fa-check"></i><b>2.2</b> Illustrated Example 1: Two-Level Model</a></li>
 </ul></li>
 </ul>
 
@@ -84,7 +84,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Multilevel Modeling in R with Application in Educational Research</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Multilevel Modeling for Educational Research with applications in R</a>
           </h1>
         </div>
 
@@ -93,14 +93,21 @@
 
             <section class="normal" id="section-">
 <div id="header">
-<h1 class="title">Multilevel Modeling in R with Application in Educational Research</h1>
+<h1 class="title">Multilevel Modeling for Educational Research with applications in R</h1>
 <p class="author"><em>Daniel Anderson</em></p>
 <p class="author"><em>Joshua Rosenburg</em></p>
 <p class="date"><em>2020-09-22</em></p>
 </div>
 <div id="preface" class="section level1">
 <h1><span class="header-section-number">1</span> Preface</h1>
-<p>I like multilevel modeling a lot. I wrote a pimer on it years ago. This is an update to that. But this time we’re doing everything in R and it will all be reproducible.</p>
+<p>Multilevel Modeling (MLM) is a powerful and flexible statistical framework for analyzing complex nested relationships across a wide variety of social science research problems. In education, we may be interested in factors that affect student achievement. Broadly, we may theorize factors associated with the school (school social groups, principal leadership, school size), the teachers (effectiveness of the teacher, specific expertise of the teacher, relationship of the teacher with the student), and the students themselves (motivation, previous achievement, general intelligence). Each of these factors associated with student achievement could be conceptualized as different “levels” of nesting. Students (at Level 1) are nested within classrooms (at Level 2), which are nested within schools (at Level 3), and each level potentially impacts student achievement. MLMs allows researchers to investigate these nested relationships and either parse them out (i.e., control for higher-level factors to examine the unique effect of a specific variable) or examine the impact of variables at the higher levels (e.g., the effect of attending public versus private school on student achievement). In other contexts, MLM may be used to investigate other nested relationships, including, for example, how employee interactions differ by the type of organization the employees belong to (e.g., corporate compared to local). In this book we will focus exclusively on the application of MLMs to educational research, but it’s important to keep in mind that the principles of multilevel modeling extend to a much wider variety of problems, including (as we will see) situations where the nesting is less clear. Consider, for example, neighborhoods and schools. The nesting becomes less clear here because students from the same neighborhood may attend different schools, while students from different neighborhoods may attend the same school. In this case, students would be nested in neighborhoods, and students would be nested in schools, but schools are not nested in neighborhoods or vice versa. These are referred to as non-nested or cross-classified models and are still readily handled by MLMs.</p>
+<p>MLM is also particularly well suited for evaluating changes in data through growth models applied to longitudinal data. Growth models can be used to evaluate how individuals are changing over time on an outcome, and how specific variables at any level relate to where they started and/or the rate at which they change. For example, we could examine data from a cohort of students as they moved from kindergarten through grade 5 in urban and rural schools. We could then test whether the achievement of students attending urban schools differed significantly in kindergarten from students attending rural schools, and whether these same students differed in the rate at which they progressed during the 6 years of the study. We could also examine other characteristics of the students. For example, we could examine the rate at which students with one specific disability (e.g., autism spectrum disorder) progressed as compared to students with a different disability (e.g., learning disabled), and whether this observed relationship held for students in both urban and rural schools.</p>
+<p>The purpose of this book is to introduce readers to the core concepts of MLMs as applied to cross-sectional and longitudinal data. MLM is a complex topic and few assumptions are made about readers’ familiarity with the topic outside of a basic understanding of regression. The book focuses on applied examples, including important decisions that analysts must make when building complex models—how to handle missing data in the predictors or the outcome, how estimated relations in longitudinal data carry forward (or not), what predictor variable vary randomly at higher levels, etc.</p>
+<p>In the [first chapter][Basic Concepts], we begin with a brief explanation of nested data structures and some of the problems they can pose to if not modeled correctly. The primary components of a two-level model with cross-sectional data are then introduced and important elements of consideration discussed. The basic notation for models is also introduced, along with model building techniques and important statistics accompanying MLMs, including indicators of the overall model fit, the intraclass correlation coefficient (ICC), and the Pseudo <span class="math inline">\(R^2\)</span> statistic. All the basic concepts of MLMs are introduced in this section, which is concluded with an illustrated example using real data.</p>
+<p>In Chapter 3, the principles introduced for cross-sectional data are extended to illustrate how the concept of nesting can be used to measure growth by treating time as being nested within a student. In other words, just as many students may be nested within a school in a model with cross-sectional data, so too can multiple test scores be nested within an individual with longitudinal data. A two-level growth model is first introduced. It is then shown how the notation and model-building strategies can be expanded to three-levels. Considerable time is taken in Chapter 3 to reflect on specific issues related to growth modeling, including the linearity of the slope, the coding of time, and covariates that may vary by time.</p>
+<p>MLM notation is discussed in considerable detail given that it is critical to understanding the specific model that has been applied. As stated earlier, it is also assumed that readers have a basic understanding of regression.</p>
+<!-- I think we can take the chapters from the ref below, and maybe put it in an appendix (I wrote them) -->
+<p>For readers not yet familiar with regression, I recommend reading the first two sections of the structural equation modeling manuscript from this series (Anderson, Patarapichayatham, &amp; Nese, 2013).</p>
 
 </div>
             </section>
@@ -109,7 +116,7 @@
         </div>
       </div>
 
-<a href="introduction.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="basic-concepts.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="assets/gitbook-2.6.7/js/app.min.js"></script>
@@ -162,6 +169,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

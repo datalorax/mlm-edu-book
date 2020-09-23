@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3 Basic Concepts | Multilevel Modeling in R with Application in Educational Research</title>
+  <title>2 Basic Concepts | Multilevel Modeling for Educational Research with applications in R</title>
   <meta name="description" content="This is a draft of a book on multilevel modeling for educational researchers using R." />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3 Basic Concepts | Multilevel Modeling in R with Application in Educational Research" />
+  <meta property="og:title" content="2 Basic Concepts | Multilevel Modeling for Educational Research with applications in R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3 Basic Concepts | Multilevel Modeling in R with Application in Educational Research" />
+  <meta name="twitter:title" content="2 Basic Concepts | Multilevel Modeling for Educational Research with applications in R" />
   
   <meta name="twitter:description" content="This is a draft of a book on multilevel modeling for educational researchers using R." />
   
@@ -32,7 +32,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="introduction.html"/>
+<link rel="prev" href="index.html"/>
 <link rel="next" href="model-building.html"/>
 <script src="assets/jquery-2.2.3/jquery.min.js"></script>
 <link href="assets/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -55,6 +55,7 @@
 
 
 
+<link rel="stylesheet" href="custom.css" type="text/css" />
 </head>
 
 <body>
@@ -68,12 +69,11 @@
 
 <ul class="summary">
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a></li>
-<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
-<li class="chapter" data-level="3" data-path="basic-concepts.html"><a href="basic-concepts.html"><i class="fa fa-check"></i><b>3</b> Basic Concepts</a><ul>
-<li class="chapter" data-level="3.1" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>3.1</b> Model building</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="model-building.html"><a href="model-building.html#centering"><i class="fa fa-check"></i><b>3.1.1</b> Centering</a></li>
+<li class="chapter" data-level="2" data-path="basic-concepts.html"><a href="basic-concepts.html"><i class="fa fa-check"></i><b>2</b> Basic Concepts</a><ul>
+<li class="chapter" data-level="2.1" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>2.1</b> Model building</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="model-building.html"><a href="model-building.html#centering"><i class="fa fa-check"></i><b>2.1.1</b> Centering</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="illustrated-example-1-two-level-model.html"><a href="illustrated-example-1-two-level-model.html"><i class="fa fa-check"></i><b>3.2</b> Illustrated Example 1: Two-Level Model</a></li>
+<li class="chapter" data-level="2.2" data-path="illustrated-example-1-two-level-model.html"><a href="illustrated-example-1-two-level-model.html"><i class="fa fa-check"></i><b>2.2</b> Illustrated Example 1: Two-Level Model</a></li>
 </ul></li>
 </ul>
 
@@ -84,7 +84,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Multilevel Modeling in R with Application in Educational Research</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Multilevel Modeling for Educational Research with applications in R</a>
           </h1>
         </div>
 
@@ -93,7 +93,7 @@
 
             <section class="normal" id="section-">
 <div id="basic-concepts" class="section level1">
-<h1><span class="header-section-number">3</span> Basic Concepts</h1>
+<h1><span class="header-section-number">2</span> Basic Concepts</h1>
 <p>In contexts where data are nested (e.g., students nested within schools) and the effect of predictor variables on some outcome depend on that nesting, it is important that the nesting be accounted for in the model to avoid misrepresenting the effects. In many cases, individuals nested within some higher-level unit are more similar to each other than they are different and the observed effect of some treatment may then depend, in part, upon their membership to a specific higher-level unit (e.g., students attending School A instead of School B). If the data are dependent upon the higher-level unit then the residuals of individuals within the unit will be correlated – violating the independence of observations assumption of standard single-level regression (Raudenbush &amp; Bryk, 2002).</p>
 <p>As Roberts (2004) showed, not accounting for nested structures may potentially have dramatic effects and can even reverse the fundamental findings of the study. Roberts used a composite variable called “urbanicity” to predict students’ science achievement. Without accounting for the nesting there was a .77 correlation, indicating that as students’ urbanicity score increased, their science achievement generally did as well. This finding was puzzling and counter to previous research (e.g., Hannaway &amp; Talbert, 1993). However, by accounting for the nesting of students within schools, the correlation became -.81, implying that as students’ urbanicity increased their science achievement generally decreased. The reversal of the observed effect was found because within each school the correlation was negative, but by ignoring the context of the school the correlation “looked” positive. Generally, accounting for nesting does not produce as dramatic results as those shown by Roberts, but it serves as a good reminder for why accounting for nesting is so important.</p>
 <p>Not accounting for nested data structures generally leads to aggregation bias, misestimated standard errors, and heterogeneity of regression (Raudenbush &amp; Bryk, 2002). Aggregation bias occurs when a variable takes on a different meaning in its aggregated form than it does in its disaggregated form. When entering the aggregated variable into the model as a predictor variable it may then bias the results toward the aggregated meaning of the variable. As Raudenbush and Bryk highlight, for example, the overall composition of a school’s student population (e.g., percent of students eligible for free or reduced price lunch; FRL) may have an effect on individual students beyond the effect of individual FRL eligibility. As will be discussed later in the paper, HLM can readily handle these complex relationships.</p>
@@ -145,7 +145,7 @@ Y_ij=γ_00+γ_01 W_j+u_0j+γ_10 X_ij+γ_11 W_j X_ij+u_1j X_ij+r_ij</p>
           </div>
         </div>
       </div>
-<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="model-building.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
@@ -199,6 +199,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

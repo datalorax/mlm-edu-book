@@ -1,4 +1,5 @@
 bookdown::gitbook:
+  css: custom.css
   lib_dir: assets
   split_by: section
   config:

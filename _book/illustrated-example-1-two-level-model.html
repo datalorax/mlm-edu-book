@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.2 Illustrated Example 1: Two-Level Model | Multilevel Modeling in R with Application in Educational Research</title>
+  <title>2.2 Illustrated Example 1: Two-Level Model | Multilevel Modeling for Educational Research with applications in R</title>
   <meta name="description" content="This is a draft of a book on multilevel modeling for educational researchers using R." />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.2 Illustrated Example 1: Two-Level Model | Multilevel Modeling in R with Application in Educational Research" />
+  <meta property="og:title" content="2.2 Illustrated Example 1: Two-Level Model | Multilevel Modeling for Educational Research with applications in R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.2 Illustrated Example 1: Two-Level Model | Multilevel Modeling in R with Application in Educational Research" />
+  <meta name="twitter:title" content="2.2 Illustrated Example 1: Two-Level Model | Multilevel Modeling for Educational Research with applications in R" />
   
   <meta name="twitter:description" content="This is a draft of a book on multilevel modeling for educational researchers using R." />
   
@@ -55,6 +55,7 @@
 
 
 
+<link rel="stylesheet" href="custom.css" type="text/css" />
 </head>
 
 <body>
@@ -68,12 +69,11 @@
 
 <ul class="summary">
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preface</a></li>
-<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
-<li class="chapter" data-level="3" data-path="basic-concepts.html"><a href="basic-concepts.html"><i class="fa fa-check"></i><b>3</b> Basic Concepts</a><ul>
-<li class="chapter" data-level="3.1" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>3.1</b> Model building</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="model-building.html"><a href="model-building.html#centering"><i class="fa fa-check"></i><b>3.1.1</b> Centering</a></li>
+<li class="chapter" data-level="2" data-path="basic-concepts.html"><a href="basic-concepts.html"><i class="fa fa-check"></i><b>2</b> Basic Concepts</a><ul>
+<li class="chapter" data-level="2.1" data-path="model-building.html"><a href="model-building.html"><i class="fa fa-check"></i><b>2.1</b> Model building</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="model-building.html"><a href="model-building.html#centering"><i class="fa fa-check"></i><b>2.1.1</b> Centering</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="illustrated-example-1-two-level-model.html"><a href="illustrated-example-1-two-level-model.html"><i class="fa fa-check"></i><b>3.2</b> Illustrated Example 1: Two-Level Model</a></li>
+<li class="chapter" data-level="2.2" data-path="illustrated-example-1-two-level-model.html"><a href="illustrated-example-1-two-level-model.html"><i class="fa fa-check"></i><b>2.2</b> Illustrated Example 1: Two-Level Model</a></li>
 </ul></li>
 </ul>
 
@@ -84,7 +84,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Multilevel Modeling in R with Application in Educational Research</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Multilevel Modeling for Educational Research with applications in R</a>
           </h1>
         </div>
 
@@ -93,7 +93,7 @@
 
             <section class="normal" id="section-">
 <div id="illustrated-example-1-two-level-model" class="section level2">
-<h2><span class="header-section-number">3.2</span> Illustrated Example 1: Two-Level Model</h2>
+<h2><span class="header-section-number">2.2</span> Illustrated Example 1: Two-Level Model</h2>
 <p>We will now move from discussing HLM from an abstract, theoretical position, to illustrating the technique through a series of concrete examples. We will begin by analyzing cross-sectional data in two ways - first with a single-level multiple regression analysis, then with a two-level HLM analysis. The analyses are conducted with the same dataset, and include students’ specific disability type as a predictor of their state alternate assessment score for mathematics. The analyses are identical, with the exception of the HLM model accounting for the nesting of students within schools. Tables 2.3 and 2.4, below, illustrate the differences between the two models. Data for these analyses came from a sample of 288 students who had a severe cognitive disability, were enrolled in fifth grade, and took the math portion of one state’s alternate assessment during the 2010-2011 school year. All students were identified as having one of seven specific disabilities: (a) intellectual disability, (b) communication disorder, (c) emotionally disturbed, (d) orthopedic impairment, (e) other health impairment, (f) autism spectrum disorder, or (g) learning disabled. The referent group for both analyses was students with a learning disability. Table 2.2 displays descriptive statistics for each variable.</p>
 <p>Table 2.2
 Descriptive Statistics: Example 1
@@ -238,6 +238,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
