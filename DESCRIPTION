@@ -17,4 +17,5 @@ License: CC BY 4.0
 URL: https://github.com/datalorax/mlm-edu-book
 BugReports: https://github.com/datalorax/mlm-edu-book/issues
 Imports: 
-    bookdown
+    bookdown,
+    learnr
